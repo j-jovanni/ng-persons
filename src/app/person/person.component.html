@@ -1,0 +1,82 @@
+<div id="app" style=" 
+padding-right: 5%; 
+padding-left: 5%; 
+width: 90%;">
+    <div id="loading" style="width: 100%;">
+        <div style="text-align: center; width: 100%; margin-top: 10%;">
+            <h1>Tabla de personas</h1>
+        </div>
+        <div style="text-align: right; width: 100%; padding-bottom: 20px;">
+            <button mat-raised-button color="primary" style="margin-right: 5%;" (click)="openDialog()">Crear
+                Persona</button>
+        </div>
+        <div id="wrap">
+
+            <table [hidden]="!loadSucces" mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Nombre &nbsp; &nbsp; &nbsp; </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef> Celular </th>
+                    <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="birthdate">
+                    <th mat-header-cell *matHeaderCellDef> Cumpleaños </th>
+                    <td mat-cell *matCellDef="let element"> {{element.birthdate  | date}} </td>
+                </ng-container>
+
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="signature" >
+                    <th mat-header-cell *matHeaderCellDef> Firma </th>
+                    <td mat-cell *matCellDef="let element">
+                        <img style='display:block; width:100px;height:100px;' id='base64image'
+                            [src]="element.signature" />
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="" style="width: 100%; text-align: center;">
+                            <a  title="Editar país"
+                                (click)="editCountry(element)">
+                                <mat-icon color="info">edit</mat-icon>
+                            </a>
+                            <a class="btn btn-simple btn-danger btn-icon like" title="Eliminar país"
+                                (click)="deleteCountry(element)">
+                                <mat-icon color="warn">delete</mat-icon>
+                            </a>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator #paginator [length]="total" [pageSizeOptions]="[5, 10]">
+            </mat-paginator>
+                <mat-spinner *ngIf="!loadSucces" style="
+                left: 50%;
+                top: 50%;"></mat-spinner>
+        </div>
+    </div>
+</div>

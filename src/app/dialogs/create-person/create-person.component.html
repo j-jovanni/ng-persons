@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Delete file</h1>
+<h1 mat-dialog-title>{{isEdit?"Editar persona": "Crear persona"}}</h1>
 <div mat-dialog-content>
     <form #ngForm [formGroup]="formState" class="crs-m-t-16">
         <div class="form-group row">
@@ -65,7 +65,7 @@
         </div>
     </div>
     <div class="col-md-10" style="width: 90%; text-align: right;">
-        <button mat-button (click)="clear()" color="primary">Borrar</button>
+        <button mat-button *ngIf="!isEdit" (click)="clear()" color="primary">Borrar</button>
     </div>
 
 </div>
